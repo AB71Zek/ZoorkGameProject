@@ -1,9 +1,9 @@
 Commands in ZOOrk Game:
 ----------------------
 go <direction> - Move in the specified direction (go north, go east, go south, go west, go down, go up).
-look - Display the message "You don't see anything here."
-look <object> - Display a message indicating that the object isn't found.
+look - Display if there are items available in the room.
+look <object> - Display a message indicating object details or that the object isn't found.
 take/get <item> - Pick up an item from the current room.
 drop <item> - Drop an item from your inventory into the current room.
 inventory/i - Show the contents of your inventory.
-quit - Exit the game. 
+quit - Exit the game.
