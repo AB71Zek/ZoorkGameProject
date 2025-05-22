@@ -4,22 +4,66 @@
 #include "Room.h"
 #include "ZOOrkEngine.h"
 
-
 int main() {
-    std::shared_ptr<Room> start = std::make_shared<Room>("start-room",
-                           "You are standing in an open field west of a white house, with a boarded front door.\n");
+    // Create rooms for the hero's journey
+    std::shared_ptr<Room> village = std::make_shared<Room>("village",
+        "You are in a peaceful village. The sun is setting, casting long shadows across the cobblestone streets. "
+        "The village square is quiet, with only a few villagers going about their evening business.\n");
 
-    std::shared_ptr<Room> south_of_house = std::make_shared<Room>("south-of-house",
-                                    "You are facing the south side of a white house.  There is no door here, and all the windows are barred.\n");
+    std::shared_ptr<Room> village_inn = std::make_shared<Room>("village-inn",
+        "The village inn is warm and cozy. A fire crackles in the hearth, and the smell of fresh bread fills the air. "
+        "The innkeeper is behind the counter, polishing glasses.\n");
 
-    std::shared_ptr<Room> behind_house = std::make_shared<Room>("behind-house",
-                                  "You are behind the white house. A path leads into the forest to the east. In one corner of the house there is a small window which is slightly ajar.\n");
+    std::shared_ptr<Room> village_square = std::make_shared<Room>("village-square",
+        "The village square is the heart of the community. A large fountain stands in the center, surrounded by market stalls. "
+        "The town hall rises majestically to the north.\n");
 
-    Passage::createBasicPassage(start.get(), south_of_house.get(), "south", true);
-    Passage::createBasicPassage(south_of_house.get(), behind_house.get(), "east", true);
+    std::shared_ptr<Room> town_hall = std::make_shared<Room>("town-hall",
+        "The town hall is an impressive building with high ceilings and polished wooden floors. "
+        "The mayor's office is to the north, and the council chamber is to the east.\n");
 
-    ZOOrkEngine zoork(start);
+    std::shared_ptr<Room> mayors_office = std::make_shared<Room>("mayors-office",
+        "The mayor's office is elegantly furnished with a large desk and comfortable chairs. "
+        "A map of the kingdom hangs on the wall, showing the dangerous forest to the east.\n");
 
+    std::shared_ptr<Room> council_chamber = std::make_shared<Room>("council-chamber",
+        "The council chamber is a circular room with a large round table in the center. "
+        "Ancient tapestries line the walls, telling stories of past heroes.\n");
+
+    std::shared_ptr<Room> forest_entrance = std::make_shared<Room>("forest-entrance",
+        "You stand at the edge of the Dark Forest. The trees loom tall and foreboding, their branches creating a natural archway. "
+        "The path continues deeper into the forest to the east.\n");
+
+    std::shared_ptr<Room> forest_clearing = std::make_shared<Room>("forest-clearing",
+        "A small clearing in the forest. Sunlight filters through the canopy, creating dappled patterns on the ground. "
+        "A mysterious stone altar stands in the center.\n");
+
+    std::shared_ptr<Room> ancient_ruins = std::make_shared<Room>("ancient-ruins",
+        "Crumbling stone walls and broken columns rise from the forest floor. This was once a great temple, "
+        "now reclaimed by nature. A staircase leads down into darkness.\n");
+
+    std::shared_ptr<Room> temple_chamber = std::make_shared<Room>("temple-chamber",
+        "The underground temple chamber is surprisingly well-preserved. Ancient runes glow faintly on the walls, "
+        "and a pedestal stands in the center of the room.\n");
+
+    std::shared_ptr<Room> secret_garden = std::make_shared<Room>("secret-garden",
+        "A hidden garden behind the temple. Crystal-clear water flows from a spring, feeding a small pool. "
+        "Magical plants grow in abundance, their flowers glowing with inner light.\n");
+
+    // Create passages between rooms
+    Passage::createBasicPassage(village.get(), village_inn.get(), "in", true);
+    Passage::createBasicPassage(village.get(), village_square.get(), "north", true);
+    Passage::createBasicPassage(village_square.get(), town_hall.get(), "north", true);
+    Passage::createBasicPassage(town_hall.get(), mayors_office.get(), "north", true);
+    Passage::createBasicPassage(town_hall.get(), council_chamber.get(), "east", true);
+    Passage::createBasicPassage(village_square.get(), forest_entrance.get(), "east", true);
+    Passage::createBasicPassage(forest_entrance.get(), forest_clearing.get(), "east", true);
+    Passage::createBasicPassage(forest_clearing.get(), ancient_ruins.get(), "east", true);
+    Passage::createBasicPassage(ancient_ruins.get(), temple_chamber.get(), "down", true);
+    Passage::createBasicPassage(temple_chamber.get(), secret_garden.get(), "east", true);
+
+    // Start the game in the village
+    ZOOrkEngine zoork(village);
     zoork.run();
 
     return 0;
