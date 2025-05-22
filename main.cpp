@@ -54,7 +54,7 @@ int main() {
     std::shared_ptr<Room> boss_room = std::make_shared<Room>("boss-room",
         "A massive chamber with high ceilings. The air is thick with smoke and the smell of sulfur. "
         "A huge dragon stands before you, its scales glinting in the dim light.\n",
-        std::make_shared<BossRoomEnterCommand>(nullptr));  // We'll set the gameObject later
+        std::make_shared<BossRoomEnterCommand>(Player::instance().get()));  // Pass the Player instance
 
     // Create some test items
     auto key = std::make_shared<Item>("key", "A rusty old key that might unlock something.");
@@ -82,7 +82,7 @@ int main() {
     Passage::createBasicPassage(secret_garden, boss_room, "east", true);
 
     // Set the gameObject for the boss room command
-    boss_room->setEnterCommand(std::make_shared<BossRoomEnterCommand>(boss_room.get()));
+    boss_room->setEnterCommand(std::make_shared<BossRoomEnterCommand>(Player::instance().get()));
 
     // Start the game in the village
     ZOOrkEngine zoork(village);
