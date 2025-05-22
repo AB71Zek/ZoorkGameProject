@@ -4,6 +4,7 @@
 #include "Room.h"
 #include "ZOOrkEngine.h"
 #include "BossRoomEnterCommand.h"
+#include "NPCConversationCommand.h"
 
 int main() {
     // Create rooms for the hero's journey
@@ -37,7 +38,11 @@ int main() {
 
     std::shared_ptr<Room> forest_clearing = std::make_shared<Room>("forest-clearing",
         "A small clearing in the forest. Sunlight filters through the canopy, creating dappled patterns on the ground. "
-        "A mysterious stone altar stands in the center.\n");
+        "A mysterious stone altar stands in the center. You see a person, dressed in peculiar fashion, standing at the south of the ruin.\n");
+
+    std::shared_ptr<Room> npc_meeting = std::make_shared<Room>("npc-meeting",
+        "You approach the strangely dressed person. They seem to be waiting for you.\n",
+        std::make_shared<NPCConversationCommand>());
 
     std::shared_ptr<Room> ancient_ruins = std::make_shared<Room>("ancient-ruins",
         "Crumbling stone walls and broken columns rise from the forest floor. This was once a great temple, "
@@ -54,7 +59,7 @@ int main() {
     std::shared_ptr<Room> boss_room = std::make_shared<Room>("boss-room",
         "A massive chamber with high ceilings. The air is thick with smoke and the smell of sulfur. "
         "A huge dragon stands before you, its scales glinting in the dim light.\n",
-        std::make_shared<BossRoomEnterCommand>(Player::instance().get(), village_square));  // Pass the Player instance and village_square
+        std::make_shared<BossRoomEnterCommand>(Player::instance().get(), village_square));
 
     // Create some test items
     auto key = std::make_shared<Item>("key", "A rusty old key that might unlock something.");
@@ -66,7 +71,7 @@ int main() {
     village->addItem(key);
     village_square->addItem(map);
     town_hall->addItem(sword);
-    mayors_office->addItem(potion);
+    temple_chamber->addItem(potion);
 
     // Create passages between rooms
     Passage::createBasicPassage(village, village_inn, "in", true);
@@ -76,6 +81,7 @@ int main() {
     Passage::createBasicPassage(town_hall, council_chamber, "east", true);
     Passage::createBasicPassage(village_square, forest_entrance, "east", true);
     Passage::createBasicPassage(forest_entrance, forest_clearing, "east", true);
+    Passage::createBasicPassage(forest_clearing, npc_meeting, "south", true);
     Passage::createBasicPassage(forest_clearing, ancient_ruins, "east", true);
     Passage::createBasicPassage(ancient_ruins, temple_chamber, "down", true);
     Passage::createBasicPassage(temple_chamber, secret_garden, "east", true);

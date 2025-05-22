@@ -1,6 +1,24 @@
-cmake_minimum_required(VERSION 3.23)
+cmake_minimum_required(VERSION 3.10)
 project(ZOOrk)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(ZOOrk main.cpp Item.h Command.h Item.cpp Character.cpp Character.h Location.cpp Location.h GameObject.cpp GameObject.h Room.cpp Room.h Passage.cpp Passage.h NullRoom.cpp NullRoom.h NullCommand.cpp NullCommand.h Player.cpp Player.h RoomDefaultEnterCommand.cpp RoomDefaultEnterCommand.h ZOOrkEngine.cpp ZOOrkEngine.h PassageDefaultEnterCommand.cpp PassageDefaultEnterCommand.h NullPassage.cpp NullPassage.h BossRoomEnterCommand.cpp BossRoomEnterCommand.h)
+add_executable(ZOOrk
+    main.cpp
+    Item.cpp
+    Character.cpp
+    Location.cpp
+    GameObject.cpp
+    Room.cpp
+    Passage.cpp
+    NullRoom.cpp
+    NullCommand.cpp
+    Player.cpp
+    RoomDefaultEnterCommand.cpp
+    ZOOrkEngine.cpp
+    PassageDefaultEnterCommand.cpp
+    NullPassage.cpp
+    BossRoomEnterCommand.cpp
+    NPCConversationCommand.cpp
+)

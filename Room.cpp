@@ -4,6 +4,7 @@
 
 #include "NullPassage.h"
 #include "Room.h"
+#include <iostream>
 
 #include <utility>
 
@@ -19,14 +20,14 @@ void Room::addPassage(const std::string &direction, std::shared_ptr<Passage> p) 
 }
 
 void Room::removePassage(const std::string &direction) {
-    if (passageMap.contains(direction)) {
+    if (passageMap.find(direction) != passageMap.end()) {
         passageMap.erase(direction);
     }
 }
 
 std::shared_ptr<Passage> Room::getPassage(const std::string &direction) {
-    if (passageMap.contains(direction)) {
-        return passageMap[direction];
+    if (passageMap.find(direction) != passageMap.end()) {
+        return passageMap.at(direction);
     } else {
         std::cout << "It is impossible to go " << direction << "!\n";
         return std::make_shared<NullPassage>(std::static_pointer_cast<Room>(shared_from_this()));
