@@ -24,6 +24,7 @@ public:
     void removeItem(const std::string&);
     std::shared_ptr<Item> getItem(const std::string&);
     std::shared_ptr<Item> retrieveItem(const std::string&);
+    const std::vector<std::shared_ptr<Item>>& getItems() const { return items; }
 //    void addCharacter(Character*);
 //    void removeCharacter(const std::string&);
 //    Character* getCharacter(const std::string&);

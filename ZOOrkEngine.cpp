@@ -69,7 +69,21 @@ void ZOOrkEngine::handleLookCommand(std::vector<std::string> arguments) {
     auto currentRoom = player->getCurrentRoom();
     
     if (arguments.empty()) {
-        std::cout << "You don't see anything here.\n";
+        // Show room description
+        currentRoom->enter();
+        
+        // Show items in the room
+        std::cout << "\nItems in this room:\n";
+        bool hasItems = false;
+        for (const auto& item : currentRoom->getItems()) {
+            if (!hasItems) {
+                hasItems = true;
+            }
+            std::cout << "- " << item->getName() << ": " << item->getDescription() << "\n";
+        }
+        if (!hasItems) {
+            std::cout << "There are no items here.\n";
+        }
     } else {
         // Combine all arguments into a single string for the object name
         std::string objectName;
@@ -81,9 +95,12 @@ void ZOOrkEngine::handleLookCommand(std::vector<std::string> arguments) {
         }
         
         // Look for the object in the current room
-        // For now, we'll just show a message that we can't find the object
-        // This will be expanded when we implement items and characters
-        std::cout << "You don't see any " << objectName << " here.\n";
+        auto item = currentRoom->getItem(objectName);
+        if (item) {
+            std::cout << item->getDescription() << "\n";
+        } else {
+            std::cout << "You don't see any " << objectName << " here.\n";
+        }
     }
 }
 
