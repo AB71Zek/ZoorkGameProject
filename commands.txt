@@ -1,10 +1,18 @@
+BACKSTORY:
+The hero(player) was once a normal person, trying to make a difference in world. One day, he travels to a distant land to learn advanced skills. During his journey, he finds a town.
+The town is populated and the hero decides to go around because the vibes don't seem very positive. As he explores, he finds a strange guy dressed professionally but at the same time,
+very peculiarly covered in black. The stranger, tells the hero about a prevailing evil lurking in the depths of the ancient ruins, a FIRE DRAGON! The hero explores items, he finds a
+purple sword that gives him the abilities to fight the dragon. He also finds a potion that gives him strength to carry on. The hero then heads towards the depths of the ruins to find
+and defeat the dragon. 'May the hero find success.' says the stranger as the hero vanishes behind the horizon of the setting sun....
+
 GOAL:
 Defeat the source of disruption, The Fire Dragon lurking in the Ancient Ruins!
 
 Start:
-1. Open directory
+1. Open directory to 'build'
 2. cmake ..
-3. Play the Game!
+3. ./ZOOrk
+4. Play the Game!
 
 Hints:
 1. Need an item to enter the boss room
