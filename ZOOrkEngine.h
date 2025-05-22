@@ -12,6 +12,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <memory>
 
 class ZOOrkEngine {
 public:
@@ -21,7 +22,7 @@ public:
 
 private:
     bool gameOver = false;
-    Player *player;
+    std::shared_ptr<Player> player;
 
     void handleGoCommand(std::vector<std::string>);
 

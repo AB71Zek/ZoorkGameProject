@@ -6,10 +6,11 @@
 #define ZOORK_NULLPASSAGE_H
 
 #include "Passage.h"
+#include <memory>
 
 class NullPassage : public Passage {
 public:
-    explicit NullPassage(Room*);
+    explicit NullPassage(std::shared_ptr<Room>);
 };
 
 

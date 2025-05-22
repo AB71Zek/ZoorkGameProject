@@ -8,29 +8,30 @@
 #include "NullRoom.h"
 #include "Room.h"
 #include <iostream>
+#include <memory>
 
 class Passage : public Location {
 public:
     static void
-    createBasicPassage(Room*, Room*, const std::string &, bool);
+    createBasicPassage(std::shared_ptr<Room>, std::shared_ptr<Room>, const std::string &, bool);
 
-    Passage(const std::string &, const std::string &, Room*, Room*);
+    Passage(const std::string &, const std::string &, std::shared_ptr<Room>, std::shared_ptr<Room>);
 
-    Passage(const std::string &, const std::string &, std::shared_ptr<Command>, Room*, Room*);
+    Passage(const std::string &, const std::string &, std::shared_ptr<Command>, std::shared_ptr<Room>, std::shared_ptr<Room>);
 
-    void setFrom(Room*);
+    void setFrom(std::shared_ptr<Room>);
 
-    Room* getFrom() const;
+    std::shared_ptr<Room> getFrom() const;
 
-    void setTo(Room*);
+    void setTo(std::shared_ptr<Room>);
 
-    Room* getTo() const;
+    std::shared_ptr<Room> getTo() const;
 
 protected:
     static std::string oppositeDirection(const std::string &);
 
-    Room* fromRoom;
-    Room* toRoom;
+    std::shared_ptr<Room> fromRoom;
+    std::shared_ptr<Room> toRoom;
 };
 
 #endif //ZOORK_PASSAGE_H

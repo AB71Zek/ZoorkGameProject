@@ -4,4 +4,4 @@
 
 #include "NullPassage.h"
 
-NullPassage::NullPassage(Room* from) : Passage("null", "Time is a flat circle.", from, from) {}
+NullPassage::NullPassage(std::shared_ptr<Room> from) : Passage("null", "Time is a flat circle.", from, from) {}

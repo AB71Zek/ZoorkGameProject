@@ -8,7 +8,7 @@
 
 ZOOrkEngine::ZOOrkEngine(std::shared_ptr<Room> start) {
     player = Player::instance();
-    player->setCurrentRoom(start.get());
+    player->setCurrentRoom(start);
     player->getCurrentRoom()->enter();
 }
 
@@ -57,7 +57,7 @@ void ZOOrkEngine::handleGoCommand(std::vector<std::string> arguments) {
         direction = arguments[0];
     }
 
-    Room* currentRoom = player->getCurrentRoom();
+    auto currentRoom = player->getCurrentRoom();
     auto passage = currentRoom->getPassage(direction);
     player->setCurrentRoom(passage->getTo());
     passage->enter();

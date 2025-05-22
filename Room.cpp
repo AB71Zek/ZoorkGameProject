@@ -29,6 +29,6 @@ std::shared_ptr<Passage> Room::getPassage(const std::string &direction) {
         return passageMap[direction];
     } else {
         std::cout << "It is impossible to go " << direction << "!\n";
-        return std::make_shared<NullPassage>(this);
+        return std::make_shared<NullPassage>(std::static_pointer_cast<Room>(shared_from_this()));
     }
 }

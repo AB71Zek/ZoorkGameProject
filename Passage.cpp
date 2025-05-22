@@ -19,8 +19,8 @@ std::string Passage::oppositeDirection(const std::string &s) {
     else return "unknown_direction";
 }
 
-void Passage::createBasicPassage(Room* from, Room* to,
-                                 const std::string &direction, bool bidirectional = true) {
+void Passage::createBasicPassage(std::shared_ptr<Room> from, std::shared_ptr<Room> to,
+                                 const std::string &direction, bool bidirectional) {
     std::string passageName = from->getName() + "_to_" + to->getName();
     auto temp1 = std::make_shared<Passage>(passageName, "A totally normal passageway.", from, to);
     from->addPassage(direction, temp1);
@@ -31,27 +31,27 @@ void Passage::createBasicPassage(Room* from, Room* to,
     }
 }
 
-Passage::Passage(const std::string &n, const std::string &d, Room* from, Room* to)
-        : Location(n, d), fromRoom(from), toRoom(to) {
+Passage::Passage(const std::string &n, const std::string &d, std::shared_ptr<Room> from, std::shared_ptr<Room> to)
+        : Location(n, d), fromRoom(std::move(from)), toRoom(std::move(to)) {
     setEnterCommand(std::make_shared<PassageDefaultEnterCommand>(this));
 }
 
-Passage::Passage(const std::string &n, const std::string &d, std::shared_ptr<Command> c, Room* from,
-                 Room* to)
-        : Location(n, d, std::move(c)), fromRoom(from), toRoom(to) {}
+Passage::Passage(const std::string &n, const std::string &d, std::shared_ptr<Command> c, std::shared_ptr<Room> from,
+                 std::shared_ptr<Room> to)
+        : Location(n, d, std::move(c)), fromRoom(std::move(from)), toRoom(std::move(to)) {}
 
-void Passage::setFrom(Room* r) {
-    fromRoom = r;
+void Passage::setFrom(std::shared_ptr<Room> r) {
+    fromRoom = std::move(r);
 }
 
-Room* Passage::getFrom() const {
+std::shared_ptr<Room> Passage::getFrom() const {
     return fromRoom;
 }
 
-void Passage::setTo(Room* r) {
-    toRoom = r;
+void Passage::setTo(std::shared_ptr<Room> r) {
+    toRoom = std::move(r);
 }
 
-Room* Passage::getTo() const {
+std::shared_ptr<Room> Passage::getTo() const {
     return toRoom;
 }

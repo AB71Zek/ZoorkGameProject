@@ -51,16 +51,16 @@ int main() {
         "Magical plants grow in abundance, their flowers glowing with inner light.\n");
 
     // Create passages between rooms
-    Passage::createBasicPassage(village.get(), village_inn.get(), "in", true);
-    Passage::createBasicPassage(village.get(), village_square.get(), "north", true);
-    Passage::createBasicPassage(village_square.get(), town_hall.get(), "north", true);
-    Passage::createBasicPassage(town_hall.get(), mayors_office.get(), "north", true);
-    Passage::createBasicPassage(town_hall.get(), council_chamber.get(), "east", true);
-    Passage::createBasicPassage(village_square.get(), forest_entrance.get(), "east", true);
-    Passage::createBasicPassage(forest_entrance.get(), forest_clearing.get(), "east", true);
-    Passage::createBasicPassage(forest_clearing.get(), ancient_ruins.get(), "east", true);
-    Passage::createBasicPassage(ancient_ruins.get(), temple_chamber.get(), "down", true);
-    Passage::createBasicPassage(temple_chamber.get(), secret_garden.get(), "east", true);
+    Passage::createBasicPassage(village, village_inn, "in", true);
+    Passage::createBasicPassage(village, village_square, "north", true);
+    Passage::createBasicPassage(village_square, town_hall, "north", true);
+    Passage::createBasicPassage(town_hall, mayors_office, "north", true);
+    Passage::createBasicPassage(town_hall, council_chamber, "east", true);
+    Passage::createBasicPassage(village_square, forest_entrance, "east", true);
+    Passage::createBasicPassage(forest_entrance, forest_clearing, "east", true);
+    Passage::createBasicPassage(forest_clearing, ancient_ruins, "east", true);
+    Passage::createBasicPassage(ancient_ruins, temple_chamber, "down", true);
+    Passage::createBasicPassage(temple_chamber, secret_garden, "east", true);
 
     // Start the game in the village
     ZOOrkEngine zoork(village);

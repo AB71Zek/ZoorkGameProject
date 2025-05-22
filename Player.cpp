@@ -4,12 +4,12 @@
 
 #include "Player.h"
 
-Player *Player::playerInstance = nullptr;
+std::shared_ptr<Player> Player::playerInstance = nullptr;
 
-void Player::setCurrentRoom(Room* room) {
-    currentRoom = room;
+void Player::setCurrentRoom(std::shared_ptr<Room> room) {
+    currentRoom = std::move(room);
 }
 
-Room* Player::getCurrentRoom() const {
+std::shared_ptr<Room> Player::getCurrentRoom() const {
     return currentRoom;
 }

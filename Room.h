@@ -10,10 +10,11 @@
 #include "Item.h"
 #include "Location.h"
 #include <map>
+#include <memory>
 
 class Passage;
 
-class Room : public Location {
+class Room : public Location, public std::enable_shared_from_this<Room> {
 public:
     Room(const std::string &, const std::string &);
 
