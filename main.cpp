@@ -24,7 +24,7 @@ int main() {
 
     std::shared_ptr<Room> mayors_office = std::make_shared<Room>("mayors-office",
         "The mayor's office is elegantly furnished with a large desk and comfortable chairs. "
-        "A map of the kingdom hangs on the wall, showing the dangerous forest to the east.\n");
+        "A map of the kingdom hangs on the wall, showing the dangerous forest to the east of the village square.\n");
 
     std::shared_ptr<Room> council_chamber = std::make_shared<Room>("council-chamber",
         "The council chamber is a circular room with a large round table in the center. "
@@ -49,6 +49,18 @@ int main() {
     std::shared_ptr<Room> secret_garden = std::make_shared<Room>("secret-garden",
         "A hidden garden behind the temple. Crystal-clear water flows from a spring, feeding a small pool. "
         "Magical plants grow in abundance, their flowers glowing with inner light.\n");
+
+    // Create some test items
+    auto key = std::make_shared<Item>("key", "A rusty old key that might unlock something.");
+    auto map = std::make_shared<Item>("map", "A detailed map of the kingdom.");
+    auto sword = std::make_shared<Item>("sword", "A gleaming steel sword.");
+    auto potion = std::make_shared<Item>("potion", "A mysterious glowing potion.");
+
+    // Add items to rooms
+    village->addItem(key);
+    village_square->addItem(map);
+    town_hall->addItem(sword);
+    mayors_office->addItem(potion);
 
     // Create passages between rooms
     Passage::createBasicPassage(village, village_inn, "in", true);
