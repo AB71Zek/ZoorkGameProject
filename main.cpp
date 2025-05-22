@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "Room.h"
 #include "ZOOrkEngine.h"
+#include "BossRoomEnterCommand.h"
 
 int main() {
     // Create rooms for the hero's journey
@@ -48,7 +49,12 @@ int main() {
 
     std::shared_ptr<Room> secret_garden = std::make_shared<Room>("secret-garden",
         "A hidden garden behind the temple. Crystal-clear water flows from a spring, feeding a small pool. "
-        "Magical plants grow in abundance, their flowers glowing with inner light.\n");
+        "Magical plants grow in abundance, their flowers glowing with inner light. You hear a dragon roar coming from the east.\n");
+
+    std::shared_ptr<Room> boss_room = std::make_shared<Room>("boss-room",
+        "A massive chamber with high ceilings. The air is thick with smoke and the smell of sulfur. "
+        "A huge dragon stands before you, its scales glinting in the dim light.\n",
+        std::make_shared<BossRoomEnterCommand>(nullptr));  // We'll set the gameObject later
 
     // Create some test items
     auto key = std::make_shared<Item>("key", "A rusty old key that might unlock something.");
@@ -73,6 +79,10 @@ int main() {
     Passage::createBasicPassage(forest_clearing, ancient_ruins, "east", true);
     Passage::createBasicPassage(ancient_ruins, temple_chamber, "down", true);
     Passage::createBasicPassage(temple_chamber, secret_garden, "east", true);
+    Passage::createBasicPassage(secret_garden, boss_room, "east", true);
+
+    // Set the gameObject for the boss room command
+    boss_room->setEnterCommand(std::make_shared<BossRoomEnterCommand>(boss_room.get()));
 
     // Start the game in the village
     ZOOrkEngine zoork(village);
