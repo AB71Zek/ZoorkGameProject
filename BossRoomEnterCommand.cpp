@@ -95,7 +95,7 @@ void BossRoomEnterCommand::execute() {
                 exit(0);
             }
         } else {
-            std::cout << "\nYou have defeated the dragon! Congratulations!\n";
+            std::cout << "\nYou have defeated the dragon! THE END.....\n";
         }
     } else {
         // Go back to the secret garden

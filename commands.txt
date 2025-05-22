@@ -1,9 +1,21 @@
+GOAL:
+Defeat the source of disruption, The Fire Dragon lurking in the Ancient Ruins!
+
+Start:
+1. Open directory
+2. cmake ..
+3. Play the Game!
+
+Hints:
+1. Need an item to enter the boss room
+2. A certain item can boost your chance of winning...
+
 Commands in ZOOrk Game:
 ----------------------
-go <direction> - Move in the specified direction (go north, go east, go south, go west, go down, go up).
-look - Display if there are items available in the room.
-look <object> - Display a message indicating object details or that the object isn't found.
-take/get <item> - Pick up an item from the current room.
-drop <item> - Drop an item from your inventory into the current room.
-inventory/i - Show the contents of your inventory.
-quit - Exit the game.
+1. go <direction> - Move in the specified direction (go north, go east, go south, go west, go down, go up).
+2. look - Display if there are items available in the room.
+3. look <object> - Display a message indicating object details or that the object isn't found.
+4. take/get <item> - Pick up an item from the current room.
+5. drop <item> - Drop an item from your inventory into the current room.
+6. inventory/i - Show the contents of your inventory.
+7. quit - Exit the game.

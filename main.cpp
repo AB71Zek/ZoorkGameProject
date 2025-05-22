@@ -10,7 +10,7 @@ int main() {
     // Create rooms for the hero's journey
     std::shared_ptr<Room> village = std::make_shared<Room>("village",
         "You are in a peaceful village. The sun is setting, casting long shadows across the cobblestone streets. "
-        "The village square is quiet, with only a few villagers going about their evening business.\n");
+        "The village square is quiet, a road leads north which seems to be crowded.\n");
 
     std::shared_ptr<Room> village_inn = std::make_shared<Room>("village-inn",
         "The village inn is warm and cozy. A fire crackles in the hearth, and the smell of fresh bread fills the air. "
@@ -18,7 +18,7 @@ int main() {
 
     std::shared_ptr<Room> village_square = std::make_shared<Room>("village-square",
         "The village square is the heart of the community. A large fountain stands in the center, surrounded by market stalls. "
-        "The town hall rises majestically to the north.\n");
+        "The town hall rises majestically to the north. The east is covered by a dense forest\n");
 
     std::shared_ptr<Room> town_hall = std::make_shared<Room>("town-hall",
         "The town hall is an impressive building with high ceilings and polished wooden floors. "
@@ -38,7 +38,7 @@ int main() {
 
     std::shared_ptr<Room> forest_clearing = std::make_shared<Room>("forest-clearing",
         "A small clearing in the forest. Sunlight filters through the canopy, creating dappled patterns on the ground. "
-        "A mysterious stone altar stands in the center. You see a person, dressed in peculiar fashion, standing at the south of the ruin.\n");
+        "A mysterious stone altar stands in the center. YOU SEE A PERSON! Dressed in peculiar fashion, standing at the south of the ruin.\n");
 
     std::shared_ptr<Room> npc_meeting = std::make_shared<Room>("npc-meeting",
         "You approach the strangely dressed person. They seem to be waiting for you.\n",
