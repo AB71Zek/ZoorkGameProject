@@ -5,5 +5,6 @@
 #include "RoomDefaultEnterCommand.h"
 
 void RoomDefaultEnterCommand::execute() {
+    std::cout << "[" << gameObject->getName() << "]\n";
     std::cout << gameObject->getDescription() << "\n";
 }

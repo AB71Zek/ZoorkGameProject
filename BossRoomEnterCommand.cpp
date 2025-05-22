@@ -7,6 +7,9 @@
 #include <random>
 #include <ctime>
 
+BossRoomEnterCommand::BossRoomEnterCommand(Player* player, std::shared_ptr<Room> villageSquare)
+    : Command(player), villageSquare(villageSquare) {}
+
 void BossRoomEnterCommand::execute() {
     std::cout << "Would you like to proceed to the boss fight? (yes/no)\n> ";
     
@@ -21,6 +24,23 @@ void BossRoomEnterCommand::execute() {
         auto player = static_cast<Player*>(gameObject);
         if (!player->getItem("sword")) {
             std::cout << "You don't have required items to fight a dragon!\n";
+            std::cout << "Would you like to start from Village Square? (yes/no)\n> ";
+            std::getline(std::cin, input);
+            std::transform(input.begin(), input.end(), input.begin(), ::tolower);
+            if (input == "yes" || input == "y") {
+                // Go to the village square directly
+                player->setCurrentRoom(villageSquare);
+                villageSquare->enter();
+                return;
+            } else {
+                // Go back to the secret garden
+                std::cout << "You decide to return to the garden.\n";
+                auto currentRoom = player->getCurrentRoom();
+                auto passage = currentRoom->getPassage("west");
+                if (passage) {
+                    passage->enter();
+                }
+            }
             return;
         }
         // Start the boss fight
@@ -65,7 +85,7 @@ void BossRoomEnterCommand::execute() {
             std::transform(input.begin(), input.end(), input.begin(), ::tolower);
             if (input == "yes" || input == "y") {
                 // Go back to the secret garden
-                auto currentRoom = static_cast<Room*>(gameObject);
+                auto currentRoom = player->getCurrentRoom();
                 auto passage = currentRoom->getPassage("west");
                 if (passage) {
                     passage->enter();
@@ -81,7 +101,8 @@ void BossRoomEnterCommand::execute() {
         // Go back to the secret garden
         std::cout << "You decide to return to the garden.\n";
         // Find the passage back to the secret garden
-        auto currentRoom = static_cast<Room*>(gameObject);
+        auto player = static_cast<Player*>(gameObject);
+        auto currentRoom = player->getCurrentRoom();
         auto passage = currentRoom->getPassage("west");
         if (passage) {
             passage->enter();

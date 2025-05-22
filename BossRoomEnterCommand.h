@@ -2,13 +2,16 @@
 #define ZOORK_BOSSROOMENTERCOMMAND_H
 
 #include "Command.h"
+#include "Player.h"
+#include "Room.h"
 #include <memory>
 
 class BossRoomEnterCommand : public Command {
 public:
-    explicit BossRoomEnterCommand(GameObject* g) : Command(g) {}
-
+    BossRoomEnterCommand(Player* player, std::shared_ptr<Room> villageSquare);
     void execute() override;
+private:
+    std::shared_ptr<Room> villageSquare;
 };
 
 #endif //ZOORK_BOSSROOMENTERCOMMAND_H 
