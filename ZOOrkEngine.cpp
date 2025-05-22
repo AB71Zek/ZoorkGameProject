@@ -31,6 +31,8 @@ void ZOOrkEngine::run() {
             handleTakeCommand(arguments);
         } else if (command == "drop") {
             handleDropCommand(arguments);
+        } else if (command == "inventory" || command == "i") {
+            player->showInventory();
         } else if (command == "quit") {
             handleQuitCommand(arguments);
         } else {
@@ -86,13 +88,54 @@ void ZOOrkEngine::handleLookCommand(std::vector<std::string> arguments) {
 }
 
 void ZOOrkEngine::handleTakeCommand(std::vector<std::string> arguments) {
-    // To be implemented
-    std::cout << "This functionality is not yet enabled.\n";
+    if (arguments.empty()) {
+        std::cout << "What would you like to take?\n";
+        return;
+    }
+
+    // Combine all arguments into a single string for the item name
+    std::string itemName;
+    for (const auto& arg : arguments) {
+        if (!itemName.empty()) {
+            itemName += " ";
+        }
+        itemName += arg;
+    }
+
+    auto currentRoom = player->getCurrentRoom();
+    auto item = currentRoom->retrieveItem(itemName);
+    
+    if (item) {
+        player->addItem(item);
+        std::cout << "You take the " << itemName << ".\n";
+    } else {
+        std::cout << "You don't see any " << itemName << " here.\n";
+    }
 }
 
 void ZOOrkEngine::handleDropCommand(std::vector<std::string> arguments) {
-    // To be implemented
-    std::cout << "This functionality is not yet enabled.\n";
+    if (arguments.empty()) {
+        std::cout << "What would you like to drop?\n";
+        return;
+    }
+
+    // Combine all arguments into a single string for the item name
+    std::string itemName;
+    for (const auto& arg : arguments) {
+        if (!itemName.empty()) {
+            itemName += " ";
+        }
+        itemName += arg;
+    }
+
+    auto item = player->retrieveItem(itemName);
+    
+    if (item) {
+        player->getCurrentRoom()->addItem(item);
+        std::cout << "You drop the " << itemName << ".\n";
+    } else {
+        std::cout << "You don't have any " << itemName << ".\n";
+    }
 }
 
 void ZOOrkEngine::handleQuitCommand(std::vector<std::string> arguments) {

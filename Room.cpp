@@ -32,3 +32,35 @@ std::shared_ptr<Passage> Room::getPassage(const std::string &direction) {
         return std::make_shared<NullPassage>(std::static_pointer_cast<Room>(shared_from_this()));
     }
 }
+
+void Room::addItem(std::shared_ptr<Item> item) {
+    items.push_back(std::move(item));
+}
+
+void Room::removeItem(const std::string& itemName) {
+    items.erase(
+        std::remove_if(items.begin(), items.end(),
+            [&itemName](const std::shared_ptr<Item>& item) {
+                return item->getName() == itemName;
+            }
+        ),
+        items.end()
+    );
+}
+
+std::shared_ptr<Item> Room::getItem(const std::string& itemName) {
+    for (const auto& item : items) {
+        if (item->getName() == itemName) {
+            return item;
+        }
+    }
+    return nullptr;
+}
+
+std::shared_ptr<Item> Room::retrieveItem(const std::string& itemName) {
+    auto item = getItem(itemName);
+    if (item) {
+        removeItem(itemName);
+    }
+    return item;
+}
